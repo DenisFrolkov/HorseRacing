@@ -3,9 +3,11 @@ package com.denisf.domain.usecase
 import com.denisf.domain.model.Horse
 import com.denisf.domain.model.Race
 import com.denisf.domain.model.StartRaceParams
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.isActive
 import kotlin.random.Random
 
 class StartRaceUseCase {
@@ -34,7 +36,7 @@ class StartRaceUseCase {
 
         val progressMap = horses.associate { it.id to 0f }.toMutableMap()
 
-        while (true) {
+        while (currentCoroutineContext().isActive) {
             delay(100L)
 
             val updatedHorses = horses.map { horse ->
