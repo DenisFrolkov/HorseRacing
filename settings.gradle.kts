@@ -21,3 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "HorseRacing"
 include(":app")
+include(":data")
+include(":presentation")
+include(":domain")
