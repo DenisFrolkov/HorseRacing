@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -35,6 +36,17 @@ android {
 dependencies {
 
     implementation(project(":domain"))
+
+    //Jetpack Compose
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.compose.material3.material3)
+    implementation(libs.ui)
+    debugImplementation(libs.ui.tooling)
+    implementation("androidx.compose.material:material:1.8.3")
+
+    //Navigation
+    implementation(libs.androidx.navigation.compose)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
