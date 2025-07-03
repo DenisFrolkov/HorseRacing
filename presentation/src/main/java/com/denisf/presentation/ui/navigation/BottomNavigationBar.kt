@@ -17,8 +17,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.denisf.presentation.ui.HistoryViewModel
-import com.denisf.presentation.ui.RaceViewModel
+import com.denisf.presentation.ui.viewModel.HistoryViewModel
+import com.denisf.presentation.ui.viewModel.RaceViewModel
 import com.denisf.presentation.ui.screens.HistoryScreen
 import com.denisf.presentation.ui.screens.RaceScreen
 

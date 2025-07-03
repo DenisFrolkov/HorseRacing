@@ -39,8 +39,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.times
 import com.denisf.domain.model.Horse
-import com.denisf.presentation.ui.RaceStatus
-import com.denisf.presentation.ui.RaceViewModel
+import com.denisf.presentation.ui.viewModel.RaceStatus
+import com.denisf.presentation.ui.viewModel.RaceViewModel
 import com.denisf.presentation.ui.theme.BrownYellowWiltedLeaves
 import com.denisf.presentation.ui.theme.PaleGrayBrown
 import com.denisf.presentation.ui.theme.PaleOrangeYellow

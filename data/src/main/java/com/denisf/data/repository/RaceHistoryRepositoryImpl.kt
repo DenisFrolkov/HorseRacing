@@ -1,4 +1,4 @@
-package com.denisf.data.database.repository
+package com.denisf.data.repository
 
 import com.denisf.data.database.dao.RaceHistoryDao
 import com.denisf.data.database.mappers.Mappers.toDomain

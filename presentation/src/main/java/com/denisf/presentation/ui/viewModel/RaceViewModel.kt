@@ -1,4 +1,4 @@
-package com.denisf.presentation.ui
+package com.denisf.presentation.ui.viewModel
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -22,7 +22,7 @@ import java.time.format.DateTimeFormatter
 
 class RaceViewModel(
     private val startRaceUseCase: StartRaceUseCase,
-    private val saveRaceResultUseCase: SaveRaceResultUseCase,
+    private val saveRaceResultUseCase: SaveRaceResultUseCase
 ): ViewModel() {
 
     var raceStatus = mutableStateOf(RaceStatus.START)

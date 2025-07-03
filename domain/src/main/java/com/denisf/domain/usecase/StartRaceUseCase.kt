@@ -8,9 +8,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.isActive
+import javax.inject.Inject
 import kotlin.random.Random
 
-class StartRaceUseCase {
+class StartRaceUseCase @Inject constructor () {
 
     operator fun invoke(params: StartRaceParams): Flow<Race> = flow {
         val horseCount = params.horseCount.coerceIn(2, 6)

@@ -47,6 +47,10 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
 
+    //Dagger 2
+    implementation("com.google.dagger:dagger:2.56.2")
+    kapt("com.google.dagger:dagger-compiler:2.56.2")
+
     //Room
     implementation("androidx.room:room-runtime:2.7.2")
     kapt("androidx.room:room-compiler:2.7.2")

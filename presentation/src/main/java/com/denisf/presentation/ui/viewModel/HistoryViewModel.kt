@@ -1,4 +1,4 @@
-package com.denisf.presentation.ui
+package com.denisf.presentation.ui.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,7 +17,7 @@ class HistoryViewModel(
         .catch { emit(emptyList()) }
         .stateIn(
             scope = viewModelScope,
-            started = SharingStarted.Lazily,
+            started = SharingStarted.Companion.Lazily,
             initialValue = emptyList()
         )
 }

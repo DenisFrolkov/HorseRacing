@@ -4,19 +4,36 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.denisf.horseracing.RaceAppDependencies.provideHistoryViewModel
-import com.denisf.horseracing.RaceAppDependencies.provideRaceViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.denisf.horseracing.app.App
 import com.denisf.horseracing.ui.theme.HorseRacingTheme
 import com.denisf.presentation.ui.navigation.BottomNavigationBar
+import com.denisf.presentation.ui.viewModel.HistoryViewModel
+import com.denisf.presentation.ui.viewModel.HistoryViewModelFactory
+import com.denisf.presentation.ui.viewModel.RaceViewModel
+import com.denisf.presentation.ui.viewModel.RaceViewModelFactory
+import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
 
+    @Inject
+    lateinit var raceViewModelFactory: RaceViewModelFactory
+    private lateinit var raceViewModel: RaceViewModel
+
+    @Inject
+    lateinit var historyViewModelFactory: HistoryViewModelFactory
+    private lateinit var historyViewModel: HistoryViewModel
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        (applicationContext as App).appComponent.inject(this)
+
         enableEdgeToEdge()
         setContent {
-            val raceViewModel = provideRaceViewModel(applicationContext)
-            val historyViewModel = provideHistoryViewModel(applicationContext)
+            raceViewModel = ViewModelProvider(this, raceViewModelFactory).get(RaceViewModel::class.java)
+            historyViewModel = ViewModelProvider(this, historyViewModelFactory).get(HistoryViewModel::class.java)
 
             HorseRacingTheme {
                 BottomNavigationBar(raceViewModel, historyViewModel)

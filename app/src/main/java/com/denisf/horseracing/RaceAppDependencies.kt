@@ -3,12 +3,12 @@ package com.denisf.horseracing
 import android.content.Context
 import androidx.room.Room
 import com.denisf.data.database.AppDatabase
-import com.denisf.data.database.repository.RaceHistoryRepositoryImpl
+import com.denisf.data.repository.RaceHistoryRepositoryImpl
 import com.denisf.domain.usecase.GetRaceHistoryUseCase
 import com.denisf.domain.usecase.SaveRaceResultUseCase
 import com.denisf.domain.usecase.StartRaceUseCase
-import com.denisf.presentation.ui.HistoryViewModel
-import com.denisf.presentation.ui.RaceViewModel
+import com.denisf.presentation.ui.viewModel.HistoryViewModel
+import com.denisf.presentation.ui.viewModel.RaceViewModel
 
 object RaceAppDependencies {
 

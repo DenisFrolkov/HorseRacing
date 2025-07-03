@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.denisf.domain.model.RaceHistory
-import com.denisf.presentation.ui.HistoryViewModel
+import com.denisf.presentation.ui.viewModel.HistoryViewModel
 import com.denisf.presentation.ui.theme.OrangeYellow
 import com.denisf.presentation.ui.theme.PaleGrayBrown
 import com.denisf.presentation.ui.theme.PaleOrangeYellow
