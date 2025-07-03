@@ -17,12 +17,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.denisf.presentation.ui.HistoryViewModel
 import com.denisf.presentation.ui.RaceViewModel
 import com.denisf.presentation.ui.screens.HistoryScreen
 import com.denisf.presentation.ui.screens.RaceScreen
 
 @Composable
-fun BottomNavigationBar(raceViewModel: RaceViewModel) {
+fun BottomNavigationBar(raceViewModel: RaceViewModel, historyViewModel: HistoryViewModel) {
     val navController = rememberNavController()
     val items = listOf(BottomNavItem.Race, BottomNavItem.History)
 
@@ -64,7 +65,7 @@ fun BottomNavigationBar(raceViewModel: RaceViewModel) {
             Modifier.padding(innerPadding)
         ) {
             composable(BottomNavItem.Race.route) { RaceScreen(raceViewModel) }
-            composable(BottomNavItem.History.route) { HistoryScreen() }
+            composable(BottomNavItem.History.route) { HistoryScreen(historyViewModel) }
         }
     }
 }

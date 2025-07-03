@@ -1,10 +1,14 @@
 package com.denisf.presentation.ui
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.denisf.domain.model.Race
+import com.denisf.domain.model.RaceHistory
 import com.denisf.domain.model.StartRaceParams
+import com.denisf.domain.usecase.SaveRaceResultUseCase
 import com.denisf.domain.usecase.StartRaceUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,9 +17,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class RaceViewModel(
-    private val startRaceUseCase: StartRaceUseCase
+    private val startRaceUseCase: StartRaceUseCase,
+    private val saveRaceResultUseCase: SaveRaceResultUseCase,
 ): ViewModel() {
 
     var raceStatus = mutableStateOf(RaceStatus.START)
@@ -50,6 +57,7 @@ class RaceViewModel(
         .map { it > 0 }
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun startRace(horseCount: Int, trackLength: Int) {
         _raceState.value = null
         raceStatus.value = RaceStatus.START
@@ -59,11 +67,26 @@ class RaceViewModel(
                 _raceState.value = race
                 if (race.isFinished) {
                     raceStatus.value = RaceStatus.FINISHED
+
+                    val historyItem = RaceHistory(
+                        date = getCurrentFormattedDateTime(),
+                        winner = race.winnerId,
+                        horsesCount = race.horses.size
+                    )
+
+                    viewModelScope.launch {
+                        saveRaceResultUseCase(historyItem)
+                    }
                 } else {
                     raceStatus.value = RaceStatus.RUNNING
                 }
             }
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getCurrentFormattedDateTime(): String {
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
     }
 
     fun stopRace() {

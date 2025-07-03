@@ -15,16 +15,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -45,14 +42,12 @@ import com.denisf.domain.model.Horse
 import com.denisf.presentation.ui.RaceStatus
 import com.denisf.presentation.ui.RaceViewModel
 import com.denisf.presentation.ui.theme.BrownYellowWiltedLeaves
-import com.denisf.presentation.ui.theme.DeepBrown
 import com.denisf.presentation.ui.theme.PaleGrayBrown
 import com.denisf.presentation.ui.theme.PaleOrangeYellow
 import com.denisf.presentation.ui.theme.ShinyYellow
 
 @Composable
 fun RaceScreen(viewModel: RaceViewModel) {
-
     val race = viewModel.raceState.collectAsState().value
     val raceStatus = viewModel.raceStatus.value
 
