@@ -78,6 +78,7 @@ fun RaceScreen(viewModel: RaceViewModel) {
                         Text(
                             text = "🏁 Победила лошадь под номером $winHorse!",
                             fontSize = 20.sp,
+                            color = Color.Black,
                             fontWeight = FontWeight.Bold
                         )
                     }
@@ -86,6 +87,7 @@ fun RaceScreen(viewModel: RaceViewModel) {
                         Text(
                             text = "Забег начался!",
                             fontSize = 20.sp,
+                            color = Color.Black,
                             fontWeight = FontWeight.Medium
                         )
                     }
@@ -137,7 +139,9 @@ fun RaceScreen(viewModel: RaceViewModel) {
                             unfocusedIndicatorColor = Color.LightGray,
                             errorIndicatorColor = Color.Red,
                             focusedTextColor = Color.Black,
-                            unfocusedTextColor = Color.Black
+                            unfocusedTextColor = Color.Black,
+                            errorTextColor = Color.Black,
+                            cursorColor = Color.Black,
                         ),
                         modifier = Modifier
                             .fillMaxWidth()
@@ -164,7 +168,9 @@ fun RaceScreen(viewModel: RaceViewModel) {
                             unfocusedIndicatorColor = Color.LightGray,
                             errorIndicatorColor = Color.Red,
                             focusedTextColor = Color.Black,
-                            unfocusedTextColor = Color.Black
+                            unfocusedTextColor = Color.Black,
+                            errorTextColor = Color.Black,
+                            cursorColor = Color.Black,
                         ),
                         modifier = Modifier
                             .fillMaxWidth()
@@ -192,7 +198,7 @@ fun RaceScreen(viewModel: RaceViewModel) {
                         contentColor = Color.White
                     )
                 ) {
-                    Text("Старт")
+                    Text("Старт", color = Color.Black,)
                 }
             }
 
@@ -207,7 +213,7 @@ fun RaceScreen(viewModel: RaceViewModel) {
                         contentColor = Color.White
                     )
                 ) {
-                    Text("Заново")
+                    Text("Заново", color = Color.Black,)
                 }
             }
 
@@ -221,7 +227,7 @@ fun RaceScreen(viewModel: RaceViewModel) {
                         contentColor = Color.White
                     )
                 ) {
-                    Text("Завершить забег")
+                    Text("Завершить забег", color = Color.Black,)
                 }
             }
         }
@@ -256,6 +262,7 @@ fun HorseTrackVertical(
             text = horse.name,
             fontSize = 12.sp,
             maxLines = 1,
+            color = Color.Black,
             overflow = TextOverflow.Ellipsis,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth()

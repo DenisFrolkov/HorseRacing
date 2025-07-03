@@ -86,7 +86,7 @@ class RaceViewModel(
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun getCurrentFormattedDateTime(): String {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
     }
 
     fun stopRace() {

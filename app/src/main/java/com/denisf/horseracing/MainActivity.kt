@@ -31,6 +31,7 @@ class MainActivity : ComponentActivity() {
         (applicationContext as App).appComponent.inject(this)
 
         enableEdgeToEdge()
+
         setContent {
             raceViewModel = ViewModelProvider(this, raceViewModelFactory).get(RaceViewModel::class.java)
             historyViewModel = ViewModelProvider(this, historyViewModelFactory).get(HistoryViewModel::class.java)

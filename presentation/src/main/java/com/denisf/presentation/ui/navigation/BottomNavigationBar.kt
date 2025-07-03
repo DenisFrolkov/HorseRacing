@@ -1,15 +1,17 @@
 package com.denisf.presentation.ui.navigation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -17,10 +19,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.denisf.presentation.ui.viewModel.HistoryViewModel
-import com.denisf.presentation.ui.viewModel.RaceViewModel
 import com.denisf.presentation.ui.screens.HistoryScreen
 import com.denisf.presentation.ui.screens.RaceScreen
+import com.denisf.presentation.ui.theme.PaleGrayBrown
+import com.denisf.presentation.ui.viewModel.HistoryViewModel
+import com.denisf.presentation.ui.viewModel.RaceViewModel
 
 @Composable
 fun BottomNavigationBar(raceViewModel: RaceViewModel, historyViewModel: HistoryViewModel) {
@@ -29,20 +32,29 @@ fun BottomNavigationBar(raceViewModel: RaceViewModel, historyViewModel: HistoryV
 
     Scaffold(
         bottomBar = {
-            BottomAppBar {
+            BottomNavigation(
+                backgroundColor = Color.White
+            ) {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route
+
                 items.forEach { item ->
                     BottomNavigationItem(
                         icon = {
                             Icon(
-                                painterResource(item.icon),
+                                painter = painterResource(item.icon),
                                 contentDescription = item.title,
+                                tint = Color.Black,
                                 modifier = Modifier.size(26.dp)
                             )
                         },
-                        label = { Text(item.title, fontSize = 14.sp) },
+                        label = { Text(item.title, color = Color.Black, fontSize = 14.sp) },
                         selected = currentRoute == item.route,
+                        modifier = Modifier.background(
+                            color = if (currentRoute == item.route) PaleGrayBrown else PaleGrayBrown.copy(
+                                0.5f
+                            )
+                        ),
                         onClick = {
                             if (currentRoute != item.route) {
                                 navController.navigate(item.route) {

@@ -1,5 +1,6 @@
 package com.denisf.presentation.di
 
+import com.denisf.domain.usecase.ClearRaceHistoryUseCase
 import com.denisf.domain.usecase.GetRaceHistoryUseCase
 import com.denisf.domain.usecase.SaveRaceResultUseCase
 import com.denisf.domain.usecase.StartRaceUseCase
@@ -22,10 +23,12 @@ class PresentationModule() {
     }
     @Provides
     fun provideRHistoryViewModelFactory(
-        getRaceHistoryUseCase: GetRaceHistoryUseCase
+        getRaceHistoryUseCase: GetRaceHistoryUseCase,
+        clearRaceHistoryUseCase: ClearRaceHistoryUseCase
     ): HistoryViewModelFactory {
         return HistoryViewModelFactory(
             getRaceHistoryUseCase = getRaceHistoryUseCase,
+            clearRaceHistoryUseCase = clearRaceHistoryUseCase
         )
     }
 }
