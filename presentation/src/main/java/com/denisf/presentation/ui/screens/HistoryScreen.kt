@@ -75,11 +75,11 @@ fun HistoryScreen(historyViewModel: HistoryViewModel) {
                 },
                 colors = IconButtonDefaults.iconButtonColors(
                     containerColor = PaleGrayBrown,
-                    contentColor = Color.White
+                    contentColor = Color.Black
                 ),
                 modifier = Modifier.size(50.dp)
             ) {
-                Icon(painter = painterResource(R.drawable.clear_icon), tint = Color.Black, contentDescription = null, modifier = Modifier.size(30.dp))
+                Icon(painter = painterResource(R.drawable.clear_icon), contentDescription = null, modifier = Modifier.size(30.dp))
             }
         }
     }

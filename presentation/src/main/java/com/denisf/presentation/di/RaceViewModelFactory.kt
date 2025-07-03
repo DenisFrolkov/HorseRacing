@@ -1,9 +1,10 @@
-package com.denisf.presentation.ui.viewModel
+package com.denisf.presentation.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.denisf.domain.usecase.SaveRaceResultUseCase
 import com.denisf.domain.usecase.StartRaceUseCase
+import com.denisf.presentation.ui.viewModel.RaceViewModel
 
 class RaceViewModelFactory(
     val startRaceUseCase: StartRaceUseCase,

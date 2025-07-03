@@ -9,9 +9,9 @@ import com.denisf.horseracing.app.App
 import com.denisf.horseracing.ui.theme.HorseRacingTheme
 import com.denisf.presentation.ui.navigation.BottomNavigationBar
 import com.denisf.presentation.ui.viewModel.HistoryViewModel
-import com.denisf.presentation.ui.viewModel.HistoryViewModelFactory
+import com.denisf.presentation.di.HistoryViewModelFactory
 import com.denisf.presentation.ui.viewModel.RaceViewModel
-import com.denisf.presentation.ui.viewModel.RaceViewModelFactory
+import com.denisf.presentation.di.RaceViewModelFactory
 import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {
@@ -24,18 +24,16 @@ class MainActivity : ComponentActivity() {
     lateinit var historyViewModelFactory: HistoryViewModelFactory
     private lateinit var historyViewModel: HistoryViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         (applicationContext as App).appComponent.inject(this)
 
+        raceViewModel = ViewModelProvider(this, raceViewModelFactory).get(RaceViewModel::class.java)
+        historyViewModel = ViewModelProvider(this, historyViewModelFactory).get(HistoryViewModel::class.java)
+
         enableEdgeToEdge()
-
         setContent {
-            raceViewModel = ViewModelProvider(this, raceViewModelFactory).get(RaceViewModel::class.java)
-            historyViewModel = ViewModelProvider(this, historyViewModelFactory).get(HistoryViewModel::class.java)
-
             HorseRacingTheme {
                 BottomNavigationBar(raceViewModel, historyViewModel)
             }

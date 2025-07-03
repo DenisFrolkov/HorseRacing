@@ -9,4 +9,3 @@ data class Race(
     val endTime: Long? = null,
     val winnerId: Int? = null
 )
-

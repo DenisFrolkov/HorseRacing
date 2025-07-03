@@ -1,5 +1,6 @@
 package com.denisf.presentation.ui.viewModel
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.mutableStateOf
@@ -57,7 +58,7 @@ class RaceViewModel(
         .map { it > 0 }
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("NewApi")
     fun startRace(horseCount: Int, trackLength: Int) {
         _raceState.value = null
         raceStatus.value = RaceStatus.START
@@ -74,9 +75,7 @@ class RaceViewModel(
                         horsesCount = race.horses.size
                     )
 
-                    viewModelScope.launch {
-                        saveRaceResultUseCase(historyItem)
-                    }
+                    saveRaceResultUseCase(historyItem)
                 } else {
                     raceStatus.value = RaceStatus.RUNNING
                 }
@@ -102,13 +101,18 @@ class RaceViewModel(
         horseCountText.value = value
     }
 
-    fun updaterRaceLengthText(value: String) {
+    fun updateRaceLengthText(value: String) {
         raceLengthText.value = value
     }
 
     fun clearInput() {
         horseCountText.value = ""
         raceLengthText.value = ""
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        raceJob?.cancel()
     }
 }
 

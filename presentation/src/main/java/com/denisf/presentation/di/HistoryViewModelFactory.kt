@@ -1,9 +1,10 @@
-package com.denisf.presentation.ui.viewModel
+package com.denisf.presentation.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.denisf.domain.usecase.ClearRaceHistoryUseCase
 import com.denisf.domain.usecase.GetRaceHistoryUseCase
+import com.denisf.presentation.ui.viewModel.HistoryViewModel
 
 class HistoryViewModelFactory(
     private val getRaceHistoryUseCase: GetRaceHistoryUseCase,

@@ -1,8 +1,8 @@
 package com.denisf.data.repository
 
 import com.denisf.data.database.dao.RaceHistoryDao
-import com.denisf.data.database.mappers.Mappers.toDomain
-import com.denisf.data.database.mappers.Mappers.toEntity
+import com.denisf.data.database.mappers.toDomain
+import com.denisf.data.database.mappers.toEntity
 import com.denisf.domain.model.RaceHistory
 import com.denisf.domain.repository.RaceHistoryRepository
 import kotlinx.coroutines.flow.Flow

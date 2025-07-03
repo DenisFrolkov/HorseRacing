@@ -121,113 +121,77 @@ fun RaceScreen(viewModel: RaceViewModel) {
                         .fillMaxWidth(),
                     verticalArrangement = Arrangement.Bottom
                 ) {
-                    TextField(
-                        value = horseCountText,
-                        onValueChange = { viewModel.updateHorseCountText(it) },
-                        label = { Text(text = "Введите количество лошадей (2-6)") },
-                        singleLine = true,
-                        isError = horseCountText.isNotBlank() && !isValidHorseCount,
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        colors = TextFieldDefaults.colors(
-                            focusedContainerColor = PaleGrayBrown.copy(alpha = 0.5f),
-                            unfocusedContainerColor = PaleGrayBrown.copy(alpha = 0.5f),
-                            errorContainerColor = PaleGrayBrown.copy(alpha = 0.5f),
-                            focusedLabelColor = Color.DarkGray,
-                            unfocusedLabelColor = Color.DarkGray,
-                            errorLabelColor = Color.Red,
-                            focusedIndicatorColor = Color.DarkGray,
-                            unfocusedIndicatorColor = Color.LightGray,
-                            errorIndicatorColor = Color.Red,
-                            focusedTextColor = Color.Black,
-                            unfocusedTextColor = Color.Black,
-                            errorTextColor = Color.Black,
-                            cursorColor = Color.Black,
-                        ),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 30.dp),
+                    CustomTextField(
+                        horseCountText,
+                        {
+                            viewModel.updateHorseCountText(it)
+                        },
+                        horseCountText.isNotBlank() && !isValidHorseCount,
+                        "Введите количество лошадей (2-6)"
                     )
                     Spacer(modifier = Modifier.height(20.dp))
-                    TextField(
-                        value = raceLengthText,
-                        onValueChange = {
-                            viewModel.updaterRaceLengthText(it)
+                    CustomTextField(
+                        raceLengthText,
+                        {
+                            viewModel.updateRaceLengthText(it)
                         },
-                        label = { Text(text = "Введите длину забега") },
-                        singleLine = true,
-                        isError = raceLengthText.isNotBlank() && !isValidRaceLength,
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        colors = TextFieldDefaults.colors(
-                            focusedContainerColor = PaleGrayBrown.copy(alpha = 0.5f),
-                            unfocusedContainerColor = PaleGrayBrown.copy(alpha = 0.5f),
-                            errorContainerColor = PaleGrayBrown.copy(alpha = 0.5f),
-                            focusedLabelColor = Color.DarkGray,
-                            unfocusedLabelColor = Color.DarkGray,
-                            errorLabelColor = Color.Red,
-                            focusedIndicatorColor = Color.DarkGray,
-                            unfocusedIndicatorColor = Color.LightGray,
-                            errorIndicatorColor = Color.Red,
-                            focusedTextColor = Color.Black,
-                            unfocusedTextColor = Color.Black,
-                            errorTextColor = Color.Black,
-                            cursorColor = Color.Black,
-                        ),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 30.dp),
+                        raceLengthText.isNotBlank() && !isValidRaceLength,
+                        "Введите длину забега"
                     )
                 }
             }
         }
 
-        Spacer(modifier = Modifier.height(100.dp))
+        Spacer(modifier = Modifier.weight(1f))
 
-        when (raceStatus) {
-            RaceStatus.START -> {
-                Button(
-                    onClick = {
-                        if (isValidHorseCount && isValidRaceLength) {
-                            viewModel.startRace(
-                                horseCount = viewModel.horseCount.value,
-                                trackLength = viewModel.raceLength.value
-                            )
-                        }
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = PaleGrayBrown,
-                        contentColor = Color.White
-                    )
-                ) {
-                    Text("Старт", color = Color.Black,)
+        Box(modifier = Modifier.padding(bottom = 30.dp)) {
+            when (raceStatus) {
+                RaceStatus.START -> {
+                    Button(
+                        onClick = {
+                            if (isValidHorseCount && isValidRaceLength) {
+                                viewModel.startRace(
+                                    horseCount = viewModel.horseCount.value,
+                                    trackLength = viewModel.raceLength.value
+                                )
+                            }
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = PaleGrayBrown,
+                            contentColor = Color.Black
+                        )
+                    ) {
+                        Text("Старт")
+                    }
                 }
-            }
 
-            RaceStatus.FINISHED -> {
-                Button(
-                    onClick = {
-                        viewModel.updateRaceStatus(RaceStatus.START)
-                        viewModel.clearInput()
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = PaleGrayBrown,
-                        contentColor = Color.White
-                    )
-                ) {
-                    Text("Заново", color = Color.Black,)
+                RaceStatus.FINISHED -> {
+                    Button(
+                        onClick = {
+                            viewModel.updateRaceStatus(RaceStatus.START)
+                            viewModel.clearInput()
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = PaleGrayBrown,
+                            contentColor = Color.Black
+                        )
+                    ) {
+                        Text("Заново")
+                    }
                 }
-            }
 
-            RaceStatus.RUNNING -> {
-                Button(
-                    onClick = {
-                        viewModel.stopRace()
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = PaleGrayBrown,
-                        contentColor = Color.White
-                    )
-                ) {
-                    Text("Завершить забег", color = Color.Black,)
+                RaceStatus.RUNNING -> {
+                    Button(
+                        onClick = {
+                            viewModel.stopRace()
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = PaleGrayBrown,
+                            contentColor = Color.Black
+                        )
+                    ) {
+                        Text("Завершить забег")
+                    }
                 }
             }
         }
@@ -285,7 +249,7 @@ fun HorseTrackVertical(
                 Box(
                     modifier = Modifier
                         .matchParentSize()
-                        .background( Color.LightGray)
+                        .background(Color.LightGray)
                 )
 
                 Box(
@@ -310,6 +274,43 @@ fun HorseTrackVertical(
             }
         }
     }
+}
+
+@Composable
+fun CustomTextField(
+    horseCountText: String,
+    onValueChange: (String) -> Unit,
+    isError: Boolean,
+    placeholder: String
+) {
+    TextField(
+        value = horseCountText,
+        onValueChange = {
+            onValueChange(it)
+        },
+        label = { Text(text = placeholder) },
+        singleLine = true,
+        isError = isError,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = PaleGrayBrown.copy(alpha = 0.5f),
+            unfocusedContainerColor = PaleGrayBrown.copy(alpha = 0.5f),
+            errorContainerColor = PaleGrayBrown.copy(alpha = 0.5f),
+            focusedLabelColor = Color.DarkGray,
+            unfocusedLabelColor = Color.DarkGray,
+            errorLabelColor = Color.Red,
+            focusedIndicatorColor = Color.DarkGray,
+            unfocusedIndicatorColor = Color.LightGray,
+            errorIndicatorColor = Color.Red,
+            focusedTextColor = Color.Black,
+            unfocusedTextColor = Color.Black,
+            errorTextColor = Color.Black,
+            cursorColor = Color.Black,
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 30.dp),
+    )
 }
 
 //@Preview

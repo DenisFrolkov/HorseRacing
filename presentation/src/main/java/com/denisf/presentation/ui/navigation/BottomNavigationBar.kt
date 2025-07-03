@@ -1,6 +1,7 @@
 package com.denisf.presentation.ui.navigation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomNavigation
@@ -33,7 +34,8 @@ fun BottomNavigationBar(raceViewModel: RaceViewModel, historyViewModel: HistoryV
     Scaffold(
         bottomBar = {
             BottomNavigation(
-                backgroundColor = Color.White
+                backgroundColor = Color.White,
+                modifier = Modifier.navigationBarsPadding()
             ) {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route
@@ -51,9 +53,7 @@ fun BottomNavigationBar(raceViewModel: RaceViewModel, historyViewModel: HistoryV
                         label = { Text(item.title, color = Color.Black, fontSize = 14.sp) },
                         selected = currentRoute == item.route,
                         modifier = Modifier.background(
-                            color = if (currentRoute == item.route) PaleGrayBrown else PaleGrayBrown.copy(
-                                0.5f
-                            )
+                            color = if (currentRoute == item.route) PaleGrayBrown else PaleGrayBrown.copy(0.5f)
                         ),
                         onClick = {
                             if (currentRoute != item.route) {

@@ -1,6 +1,7 @@
 package com.denisf.domain.di
 
 import com.denisf.domain.repository.RaceHistoryRepository
+import com.denisf.domain.repository.RaceRepository
 import com.denisf.domain.usecase.ClearRaceHistoryUseCase
 import com.denisf.domain.usecase.GetRaceHistoryUseCase
 import com.denisf.domain.usecase.SaveRaceResultUseCase
@@ -9,11 +10,11 @@ import dagger.Provides
 import dagger.Module
 
 @Module
-class UseCaseModule {
+class DomainModule {
 
     @Provides
-    fun provideStartRaceUseCase(): StartRaceUseCase {
-        return StartRaceUseCase()
+    fun provideStartRaceUseCase(repository: RaceRepository): StartRaceUseCase {
+        return StartRaceUseCase(repository)
     }
 
     @Provides

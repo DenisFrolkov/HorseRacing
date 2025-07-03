@@ -4,8 +4,6 @@ import com.denisf.domain.usecase.ClearRaceHistoryUseCase
 import com.denisf.domain.usecase.GetRaceHistoryUseCase
 import com.denisf.domain.usecase.SaveRaceResultUseCase
 import com.denisf.domain.usecase.StartRaceUseCase
-import com.denisf.presentation.ui.viewModel.HistoryViewModelFactory
-import com.denisf.presentation.ui.viewModel.RaceViewModelFactory
 import dagger.Module
 import dagger.Provides
 
