@@ -16,8 +16,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -39,12 +41,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.times
 import com.denisf.domain.model.Horse
-import com.denisf.presentation.ui.viewModel.RaceStatus
-import com.denisf.presentation.ui.viewModel.RaceViewModel
 import com.denisf.presentation.ui.theme.BrownYellowWiltedLeaves
 import com.denisf.presentation.ui.theme.PaleGrayBrown
 import com.denisf.presentation.ui.theme.PaleOrangeYellow
 import com.denisf.presentation.ui.theme.ShinyYellow
+import com.denisf.presentation.ui.viewModel.RaceStatus
+import com.denisf.presentation.ui.viewModel.RaceViewModel
 
 @Composable
 fun RaceScreen(viewModel: RaceViewModel) {
@@ -59,10 +61,13 @@ fun RaceScreen(viewModel: RaceViewModel) {
     val raceLengthText by viewModel.raceLengthText.collectAsState()
     val isValidRaceLength by viewModel.isValidRaceLength.collectAsState()
 
+    val scrollable = rememberScrollState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(PaleOrangeYellow),
+            .background(PaleOrangeYellow)
+            .verticalScroll(scrollable),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column(
@@ -142,56 +147,54 @@ fun RaceScreen(viewModel: RaceViewModel) {
             }
         }
 
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.width(40.dp))
 
-        Box(modifier = Modifier.padding(bottom = 30.dp)) {
-            when (raceStatus) {
-                RaceStatus.START -> {
-                    Button(
-                        onClick = {
-                            if (isValidHorseCount && isValidRaceLength) {
-                                viewModel.startRace(
-                                    horseCount = viewModel.horseCount.value,
-                                    trackLength = viewModel.raceLength.value
-                                )
-                            }
-                        },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = PaleGrayBrown,
-                            contentColor = Color.Black
-                        )
-                    ) {
-                        Text("Старт")
-                    }
+        when (raceStatus) {
+            RaceStatus.START -> {
+                Button(
+                    onClick = {
+                        if (isValidHorseCount && isValidRaceLength) {
+                            viewModel.startRace(
+                                horseCount = viewModel.horseCount.value,
+                                trackLength = viewModel.raceLength.value
+                            )
+                        }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = PaleGrayBrown,
+                        contentColor = Color.Black
+                    )
+                ) {
+                    Text("Старт")
                 }
+            }
 
-                RaceStatus.FINISHED -> {
-                    Button(
-                        onClick = {
-                            viewModel.updateRaceStatus(RaceStatus.START)
-                            viewModel.clearInput()
-                        },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = PaleGrayBrown,
-                            contentColor = Color.Black
-                        )
-                    ) {
-                        Text("Заново")
-                    }
+            RaceStatus.FINISHED -> {
+                Button(
+                    onClick = {
+                        viewModel.updateRaceStatus(RaceStatus.START)
+                        viewModel.clearInput()
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = PaleGrayBrown,
+                        contentColor = Color.Black
+                    )
+                ) {
+                    Text("Заново")
                 }
+            }
 
-                RaceStatus.RUNNING -> {
-                    Button(
-                        onClick = {
-                            viewModel.stopRace()
-                        },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = PaleGrayBrown,
-                            contentColor = Color.Black
-                        )
-                    ) {
-                        Text("Завершить забег")
-                    }
+            RaceStatus.RUNNING -> {
+                Button(
+                    onClick = {
+                        viewModel.stopRace()
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = PaleGrayBrown,
+                        contentColor = Color.Black
+                    )
+                ) {
+                    Text("Завершить забег")
                 }
             }
         }
