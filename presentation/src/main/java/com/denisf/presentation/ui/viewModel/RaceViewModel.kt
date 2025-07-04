@@ -9,8 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.denisf.domain.model.Race
 import com.denisf.domain.model.RaceHistory
 import com.denisf.domain.model.StartRaceParams
-import com.denisf.domain.usecase.SaveRaceResultUseCase
-import com.denisf.domain.usecase.StartRaceUseCase
+import com.denisf.domain.repository.ISaveRaceResultUseCase
+import com.denisf.domain.repository.IStartRaceUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -22,8 +22,8 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class RaceViewModel(
-    private val startRaceUseCase: StartRaceUseCase,
-    private val saveRaceResultUseCase: SaveRaceResultUseCase
+    private val startRaceUseCase: IStartRaceUseCase,
+    private val saveRaceResultUseCase: ISaveRaceResultUseCase
 ): ViewModel() {
 
     var raceStatus = mutableStateOf(RaceStatus.START)
@@ -33,14 +33,12 @@ class RaceViewModel(
 
     private var raceJob: Job? = null
 
-    // Вводимые значения
     var horseCountText = MutableStateFlow("")
         private set
 
     var raceLengthText = MutableStateFlow("")
         private set
 
-    // Вычисляемые значения
     val horseCount: StateFlow<Int> = horseCountText
         .map { it.toIntOrNull() ?: 0 }
         .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
@@ -49,7 +47,6 @@ class RaceViewModel(
         .map { it.toIntOrNull() ?: 0 }
         .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
 
-    // Валидация
     val isValidHorseCount: StateFlow<Boolean> = horseCount
         .map { it in 2..6 }
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
@@ -71,7 +68,7 @@ class RaceViewModel(
 
                     val historyItem = RaceHistory(
                         date = getCurrentFormattedDateTime(),
-                        winner = race.winnerId,
+                        winnerId = race.winnerId,
                         horsesCount = race.horses.size
                     )
 

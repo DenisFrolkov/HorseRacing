@@ -6,13 +6,13 @@ import com.denisf.domain.model.RaceHistory
 fun RaceHistory.toEntity() = RaceHistoryEntity(
     id = id,
     date = date,
-    winner = winner,
+    winnerId = winnerId,
     horsesCount = horsesCount
 )
 
 fun RaceHistoryEntity.toDomain() = RaceHistory(
     id = id,
     date = date,
-    winner = winner,
+    winnerId = winnerId,
     horsesCount = horsesCount
 )

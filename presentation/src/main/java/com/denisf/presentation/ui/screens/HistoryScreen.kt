@@ -87,7 +87,7 @@ fun HistoryScreen(historyViewModel: HistoryViewModel) {
 
 @Composable
 private fun HistoryRaceItem(idItem: Int, raceHistory: RaceHistory) {
-    val winNumber = (raceHistory.winner ?: 0) + 1
+    val winNumber = (raceHistory.winnerId ?: 0) + 1
 
     Row(
         modifier = Modifier
