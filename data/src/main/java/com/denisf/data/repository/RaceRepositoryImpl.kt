@@ -14,7 +14,7 @@ import kotlin.random.Random
 class RaceRepositoryImpl() : RaceRepository {
 
     companion object {
-        private const val FRAME_DELAY_MS = 20L
+        private const val FRAME_DELAY_MS = 40L
         private const val MIN_STEP = 0.01f
         private const val MAX_STEP = 0.03f
     }
